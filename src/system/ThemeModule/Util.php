@@ -15,6 +15,7 @@ namespace Zikula\ThemeModule;
 
 use ModUtil;
 use FileUtil;
+use Zikula\ThemeModule\Entity\Repository\ThemeEntityRepository;
 use ZLanguage;
 use ThemeUtil;
 use ServiceUtil;
@@ -90,7 +91,7 @@ class Util
 
             // set defaults for all themes
             $themeVersionArray['type'] = 3;
-            $themeVersionArray['state'] = 1;
+            $themeVersionArray['state'] = ThemeEntityRepository::STATE_INACTIVE;
             $themeVersionArray['contact'] = 3;
 
             $filethemes[$bundle->getName()] = $themeVersionArray;
@@ -171,9 +172,6 @@ class Util
         // or if any current themes have been upgraded
         foreach ($filethemes as $name => $themeinfo) {
             if (empty($dbthemes[$name])) {
-                // new theme
-                $themeinfo['state'] = ThemeUtil::STATE_ACTIVE;
-
                 // add item to db
                 $item = new ThemeEntity();
                 $item->merge($themeinfo);
@@ -191,7 +189,6 @@ class Util
                         ($themeinfo['admin'] != $dbthemes[$name]['admin']) ||
                         ($themeinfo['user'] != $dbthemes[$name]['user']) ||
                         ($themeinfo['system'] != $dbthemes[$name]['system']) ||
-                        ($themeinfo['state'] != $dbthemes[$name]['state']) ||
                         ($themeinfo['contact'] != $dbthemes[$name]['contact']) ||
                         ($themeinfo['xhtml'] != $dbthemes[$name]['xhtml'])) {
                     $themeinfo['id'] = $dbthemes[$name]['id'];

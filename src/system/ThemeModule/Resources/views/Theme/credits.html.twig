@@ -29,7 +29,7 @@
             {% if key == 'admin' %}<th>{{ __('Admin panel theme') }}</th><td>{{ field|yesNo }}</td>{% endif %}
             {% if key == 'user' %}<th>{{ __('User theme') }}</th><td>{{ field|yesNo }}</td>{% endif %}
             {% if key == 'system' %}<th>{{ __('System theme') }}</th><td>{{ field|yesNo }}</td>{% endif %}
-            {% if key == 'state' %}<th>{{ __('State') }}</th><td>{% if(field) %}<span class="label label-success">{{ __('Active') }}</span>{% else %}<span class="label label-danger">{{ __('Inactive') }}</span>{% endif %} </td>{% endif %}
+            {% if key == 'state' %}<th>{{ __('State') }}</th><td>{% if(field) and field == 1 %}<span class="label label-success">{{ __('Active') }}</span>{% else %}<span class="label label-danger">{{ __('Inactive') }}</span>{% endif %} </td>{% endif %}
             {% if key == 'credits' %}<th>{{ __('Credits') }}</th><td>{{ field }}</td>{% endif %}
             {% if key == 'changelog' %}<th>{{ __('Change log') }}</th><td>{{ field }}</td>{% endif %}
             {% if key == 'help' %}<th>{{ __('Help') }}</th><td>{{ field }}</td>{% endif %}

@@ -74,6 +74,19 @@ class ThemeController extends AbstractController
     }
 
     /**
+     * @Route("/activate/{themeName}")
+     */
+    public function activateAction($themeName)
+    {
+        $theme = $this->get('zikula_theme_module.theme_entity.repository')->findOneBy(['name' => $themeName]);
+        $theme->setState(ThemeEntityRepository::STATE_ACTIVE);
+        $this->getDoctrine()->getManager()->flush();
+        $this->get('zikula.cache_clearer')->clear('symfony.config');
+
+        return $this->redirect($this->generateUrl('zikulathememodule_theme_view'));
+    }
+
+    /**
      * @Route("/makedefault/{themeName}")
      * @Theme("admin")
      * @Template
@@ -119,6 +132,8 @@ class ThemeController extends AbstractController
                         ->getQuery();
                     $query->getResult();
                 }
+                $this->get('zikula.cache_clearer')->clear('twig');
+                $this->get('zikula.cache_clearer')->clear('symfony.config');
                 $this->addFlash('status', $this->__('Done! Changed default theme.'));
             }
             if ($form->get('Cancel')->isClicked()) {
@@ -180,13 +195,16 @@ class ThemeController extends AbstractController
                     $path = realpath($this->get('kernel')->getRootDir() . '/../themes/' . $themeEntity->getDirectory());
                     try {
                         $fs->remove($path);
+                        $this->addFlash('status', $this->__('Files removed as requested.'));
                     } catch (IOException $e) {
                         $this->addFlash('danger', $this->__('Could not remove files as requested.') . ' (' . $e->getMessage() . ') ' . $this->__('The files must be removed manually.'));
                     }
                 }
                 $this->getDoctrine()->getManager()->remove($themeEntity);
                 $this->getDoctrine()->getManager()->flush();
-                $this->addFlash('status', $this->__('Done! Deleted the theme.'));
+                $this->get('zikula.cache_clearer')->clear('twig');
+                $this->get('zikula.cache_clearer')->clear('symfony.config');
+                $this->addFlash('status', $data['deletefiles'] ? $this->__('Done! Deleted the theme.') : $this->__('Done! Deactivated the theme.'));
             }
             if ($form->get('Cancel')->isClicked()) {
                 $this->addFlash('status', $this->__('Operation cancelled.'));

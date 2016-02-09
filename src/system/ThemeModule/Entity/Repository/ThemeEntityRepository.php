@@ -90,7 +90,7 @@ class ThemeEntityRepository extends EntityRepository
                     break;
             }
 
-            $qb->orderBy('t.name', 'ASC');
+            $qb->orderBy('t.displayname', 'ASC');
             $query = $qb->getQuery();
 
             /** @var $result ThemeEntity[] */
@@ -101,8 +101,10 @@ class ThemeEntityRepository extends EntityRepository
                 try {
                     $themeBundle = $kernel->getTheme($theme['name']);
                 } catch (\Exception $e) {
+                    $themeBundle = null;
                 }
                 $this->filteredGetCache[$key][$theme['directory']]['isTwigBased'] = isset($themeBundle) ? $themeBundle->isTwigBased() : false;
+                $this->filteredGetCache[$key][$theme['directory']]['vars'] = isset($themeBundle) ? $themeBundle->getThemeVars() : false;
             }
 
             if (!$this->filteredGetCache[$key]) {
