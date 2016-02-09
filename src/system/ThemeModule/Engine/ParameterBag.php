@@ -1,10 +1,10 @@
 <?php
 
-namespace Zikula\Core\Theme;
+namespace Zikula\ThemeModule\Engine;
 
 /**
  * Class ParameterBag
- * @package Zikula\Core\Theme
+ * @package Zikula\ThemeModule\Engine
  *
  * This class provides an abstracted method of collecting, managing and retrieving variables.
  * values can be stored in a namespaced array structure. i.e.

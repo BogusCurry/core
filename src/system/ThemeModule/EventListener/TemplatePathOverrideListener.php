@@ -10,22 +10,22 @@
  * information regarding copyright and licensing.
  */
 
-namespace Zikula\Bundle\CoreBundle\EventListener\Theme;
+namespace Zikula\ThemeModule\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Zikula\Core\Controller\AbstractController;
-use Zikula\Core\Theme\Engine;
+use Zikula\ThemeModule\Engine\Engine;
 
 /**
  * Class TemplatePathOverrideListener
- * @package Zikula\Bundle\CoreBundle\EventListener\Theme
+ * @package Zikula\ThemeModule\EventListener
  *
  * This class adds the theme Resources path to the search path when locating assets like templates.
  * This listener only works when new "namespaced" (e.g. "@Bundle/template.html.twig") is used.
  * If old name-scheme (Bundle:template) or controller annotations ("@Template") are used
- * the \Zikula\Bundle\CoreBundle\HttpKernel\ZikulaKernel::locateResource method is used instead
+ * the \Zikula\ThemeModule\HttpKernel\ZikulaKernel::locateResource method is used instead
  */
 class TemplatePathOverrideListener implements EventSubscriberInterface
 {

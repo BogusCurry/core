@@ -1,10 +1,11 @@
 <?php
 
-namespace Zikula\Core;
+namespace Zikula\ThemeModule;
 
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Yaml;
+use Zikula\Core\AbstractBundle;
 
 abstract class AbstractTheme extends AbstractBundle
 {

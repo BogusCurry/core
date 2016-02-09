@@ -11,21 +11,21 @@
  * information regarding copyright and licensing.
  */
 
-namespace Zikula\Bundle\CoreBundle\EventListener\Theme;
+namespace Zikula\ThemeModule\EventListener;
 
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Zikula\Core\Theme\Engine;
-use Doctrine\Common\Util\ClassUtils;
+use Zikula\ThemeModule\Engine\Engine;
 
 /**
  * Class ControllerAnnotationReaderListener
- * @package Zikula\Bundle\CoreBundle\EventListener\Theme
+ * @package Zikula\ThemeModule\EventListener
  *
  * This class reads annotations from a controller and submits them to the theme engine to
- * potentially change the theme based on that annotation. (e.g. "@Theme('admin')" annotation)
- * @see \Zikula\Core\Theme\Annotation\Theme
+ * potentially change the theme based on that annotation. (e.g. @Theme("admin") annotation)
+ * @see \Zikula\ThemeModule\Engine\Annotation\Theme
  */
 class ControllerAnnotationReaderListener implements EventSubscriberInterface
 {

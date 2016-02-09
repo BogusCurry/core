@@ -1,12 +1,12 @@
 <?php
 
-namespace Zikula\Core\Theme\Asset;
+namespace Zikula\ThemeModule\Engine\Asset;
 
-use Zikula\Core\Theme\AssetBag;
+use Zikula\ThemeModule\Engine\AssetBag;
 
 /**
  * Interface ResolverInterface
- * @package Zikula\Core\Theme\Asset
+ * @package Zikula\ThemeModule\Engine\Asset
  *
  * Provide an interface for Resolver classes.
  */

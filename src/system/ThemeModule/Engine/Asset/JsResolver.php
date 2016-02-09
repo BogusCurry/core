@@ -1,12 +1,12 @@
 <?php
 
-namespace Zikula\Core\Theme\Asset;
+namespace Zikula\ThemeModule\Engine\Asset;
 
-use Zikula\Core\Theme\AssetBag;
+use Zikula\ThemeModule\Engine\AssetBag;
 
 /**
  * Class JsResolver
- * @package Zikula\Core\Theme\Asset
+ * @package Zikula\ThemeModule\Engine\Asset
  *
  * This class compiles all js page assets into proper html code for inclusion into a page header or footer
  */

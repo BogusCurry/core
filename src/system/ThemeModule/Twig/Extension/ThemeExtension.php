@@ -14,7 +14,7 @@
 
 namespace Zikula\ThemeModule\Twig\Extension;
 
-use Zikula\Core\Theme\Asset;
+use Zikula\ThemeModule\Engine\Asset;
 
 class ThemeExtension extends \Twig_Extension
 {

@@ -63,7 +63,7 @@ class Util
 
             $bundleClass = $themeMetaData->getClass();
 
-            /** @var $bundle \Zikula\Core\AbstractTheme */
+            /** @var $bundle \Zikula\ThemeModule\AbstractTheme */
             $bundle = new $bundleClass();
             $versionClass = $bundle->getVersionClass();
 

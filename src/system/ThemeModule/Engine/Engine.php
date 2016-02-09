@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
 
-namespace Zikula\Core\Theme;
+namespace Zikula\ThemeModule\Engine;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,12 +23,12 @@ use Zikula\ExtensionsModule\Api\VariableApi;
 
 /**
  * Class Engine
- * @package Zikula\Core\Theme
+ * @package Zikula\ThemeModule\Engine
  *
  * The Theme Engine class is responsible to manage all aspects of theme management using the classes referenced below.
- * @see \Zikula\Core\Theme\*
+ * @see \Zikula\ThemeModule\Engine\*
  * @see \Zikula\Bundle\CoreBundle\EventListener\Theme\*
- * @see \Zikula\Core\AbstractTheme
+ * @see \Zikula\ThemeModule\AbstractTheme
  *
  * The Engine works by intercepting the Response sent by the module controller (the controller action is the
  * 'primary actor'). It takes this response and "wraps" the theme around it and filters the resulting html to add
@@ -36,7 +36,7 @@ use Zikula\ExtensionsModule\Api\VariableApi;
  *     Request -> Controller -> CapturedResponse -> Filter -> ThemedResponse
  *
  * In this altered Symfony Request/Response cycle, the theme can be altered by the Controller Action through Annotation.
- * @see \Zikula\Core\Theme\Annotation\Theme
+ * @see \Zikula\ThemeModule\Engine\Annotation\Theme
  * The annotation only excepts defined values.
  *
  * Themes are fully-qualified Symfony bundles with specific requirements.
@@ -47,7 +47,7 @@ class Engine
 {
     /**
      * The instance of the currently active theme.
-     * @var \Zikula\Core\AbstractTheme
+     * @var \Zikula\ThemeModule\AbstractTheme
      */
     private $activeThemeBundle = null;
     /**
@@ -208,7 +208,7 @@ class Engine
 
     /**
      * @api Core-2.0
-     * @return \Zikula\Core\AbstractTheme
+     * @return \Zikula\ThemeModule\AbstractTheme
      */
     public function getTheme()
     {
@@ -253,7 +253,7 @@ class Engine
     {
         $reflectionClass = new \ReflectionClass($controllerClassName);
         $reflectionMethod = $reflectionClass->getMethod($method);
-        $themeAnnotation = $this->annotationReader->getMethodAnnotation($reflectionMethod, 'Zikula\Core\Theme\Annotation\Theme');
+        $themeAnnotation = $this->annotationReader->getMethodAnnotation($reflectionMethod, 'Zikula\ThemeModule\Engine\Annotation\Theme');
         if (isset($themeAnnotation)) {
             // method annotations contain `@Theme` so set theme based on value
             $this->annotationValue = $themeAnnotation->value;

@@ -331,7 +331,7 @@ class ThemeUtil
     /**
      * @param $themeName
      *
-     * @return null|\Zikula\Core\AbstractTheme
+     * @return null|\Zikula\ThemeModule\AbstractTheme
      */
     public static function getTheme($themeName)
     {

@@ -10,7 +10,7 @@
  * information regarding copyright and licensing.
  */
 
-namespace Zikula\Bundle\CoreBundle\EventListener\Theme;
+namespace Zikula\ThemeModule\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -21,7 +21,7 @@ use Zikula\Core\Controller\AbstractController;
 
 /**
  * Class ModuleStylesheetInsertListener
- * @package Zikula\Bundle\CoreBundle\EventListener\Theme
+ * @package Zikula\ThemeModule\EventListener
  */
 class ModuleStylesheetInsertListener implements EventSubscriberInterface
 {

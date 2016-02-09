@@ -11,18 +11,18 @@
  * information regarding copyright and licensing.
  */
 
-namespace Zikula\Bundle\CoreBundle\EventListener\Theme;
+namespace Zikula\ThemeModule\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Zikula\Core\Theme\Engine;
+use Zikula\ThemeModule\Engine\Engine;
 use Zikula_View_Theme;
 
 /**
  * Class CreateThemedResponseListener
- * @package Zikula\Bundle\CoreBundle\EventListener\Theme
+ * @package Zikula\ThemeModule\EventListener
  *
  * This class intercepts the Response and modifies it to return a themed Response.
  * It is currently fully BC with Core-1.3 in order to return a smarty-based themed response.

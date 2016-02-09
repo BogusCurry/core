@@ -5,41 +5,39 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="zikula_core.legacy.theme_template_override_listener.class">Zikula\Bundle\CoreBundle\EventListener\ThemeTemplateOverrideYamlListener</parameter>
-        <parameter key="zikula_core.common.theme_engine.class">Zikula\Core\Theme\Engine</parameter>
-        <parameter key="zikula_core.internal.theme.create_themed_response_listener.class">Zikula\Bundle\CoreBundle\EventListener\Theme\CreateThemedResponseListener</parameter>
-        <parameter key="zikula_core.internal.theme.default_page_asset_setter_listener.class">Zikula\Bundle\CoreBundle\EventListener\Theme\DefaultPageAssetSetterListener</parameter>
-        <parameter key="zikula_core.internal.theme.default_page_var_setter_listener.class">Zikula\Bundle\CoreBundle\EventListener\Theme\DefaultPageVarSetterListener</parameter>
-        <parameter key="zikula_core.internal.theme.controller_annotation_reader_listener.class">Zikula\Bundle\CoreBundle\EventListener\Theme\ControllerAnnotationReaderListener</parameter>
-        <parameter key="zikula_core.internal.theme.template_path_override_listener.class">Zikula\Bundle\CoreBundle\EventListener\Theme\TemplatePathOverrideListener</parameter>
-        <parameter key="zikula_core.internal.theme.module_stylesheet_insert_listener.class">Zikula\Bundle\CoreBundle\EventListener\Theme\ModuleStylesheetInsertListener</parameter>
-        <parameter key="zikula_core.common.theme.assets.js.class">Zikula\Core\Theme\AssetBag</parameter>
-        <parameter key="zikula_core.common.theme.assets.css.class">Zikula\Core\Theme\AssetBag</parameter>
-        <parameter key="zikula_core.common.theme.assets.header.class">Zikula\Core\Theme\AssetBag</parameter>
-        <parameter key="zikula_core.common.theme.assets.footer.class">Zikula\Core\Theme\AssetBag</parameter>
-        <parameter key="zikula_core.common.theme.pagevars.class">Zikula\Core\Theme\ParameterBag</parameter>
-        <parameter key="zikula_core.internal.theme_filter.class">Zikula\Core\Theme\Filter</parameter>
-        <parameter key="zikula_core.common.theme.themevars.class">Zikula\Core\Theme\ParameterBag</parameter>
-        <parameter key="zikula_core.common.theme.asset_helper.class">Zikula\Core\Theme\Asset</parameter>
-        <parameter key="zikula_core.internal.theme.js_resolver.class">Zikula\Core\Theme\Asset\JsResolver</parameter>
-        <parameter key="zikula_core.internal.theme.css_resolver.class">Zikula\Core\Theme\Asset\CssResolver</parameter>
+        <!-- deprecated params -->
+        <parameter key="zikula_core.legacy.theme_template_override_listener.class">Zikula\ThemeModule\EventListener\ThemeTemplateOverrideYamlListener</parameter>
+        <parameter key="zikula.config_template_override_listener.class">Zikula\ThemeModule\EventListener\ConfigTemplateOverrideYamlListener</parameter>
+        <!-- non-legacy -->
+        <parameter key="zikula_core.internal.theme.create_themed_response_listener.class">Zikula\ThemeModule\EventListener\CreateThemedResponseListener</parameter>
+        <parameter key="zikula_core.internal.theme.default_page_asset_setter_listener.class">Zikula\ThemeModule\EventListener\DefaultPageAssetSetterListener</parameter>
+        <parameter key="zikula_core.internal.theme.default_page_var_setter_listener.class">Zikula\ThemeModule\EventListener\DefaultPageVarSetterListener</parameter>
+        <parameter key="zikula_core.internal.theme.controller_annotation_reader_listener.class">Zikula\ThemeModule\EventListener\ControllerAnnotationReaderListener</parameter>
+        <parameter key="zikula_core.internal.theme.template_path_override_listener.class">Zikula\ThemeModule\EventListener\TemplatePathOverrideListener</parameter>
+        <parameter key="zikula_core.internal.theme.module_stylesheet_insert_listener.class">Zikula\ThemeModule\EventListener\ModuleStylesheetInsertListener</parameter>
+        <parameter key="zikula_core.common.theme_engine.class">Zikula\ThemeModule\Engine\Engine</parameter>
+        <parameter key="zikula_core.common.theme.assets.js.class">Zikula\ThemeModule\Engine\AssetBag</parameter>
+        <parameter key="zikula_core.common.theme.assets.css.class">Zikula\ThemeModule\Engine\AssetBag</parameter>
+        <parameter key="zikula_core.common.theme.assets.header.class">Zikula\ThemeModule\Engine\AssetBag</parameter>
+        <parameter key="zikula_core.common.theme.assets.footer.class">Zikula\ThemeModule\Engine\AssetBag</parameter>
+        <parameter key="zikula_core.common.theme.pagevars.class">Zikula\ThemeModule\Engine\ParameterBag</parameter>
+        <parameter key="zikula_core.internal.theme_filter.class">Zikula\ThemeModule\Engine\Filter</parameter>
+        <parameter key="zikula_core.common.theme.themevars.class">Zikula\ThemeModule\Engine\ParameterBag</parameter>
+        <parameter key="zikula_core.common.theme.asset_helper.class">Zikula\ThemeModule\Engine\Asset</parameter>
+        <parameter key="zikula_core.internal.theme.js_resolver.class">Zikula\ThemeModule\Engine\Asset\JsResolver</parameter>
+        <parameter key="zikula_core.internal.theme.css_resolver.class">Zikula\ThemeModule\Engine\Asset\CssResolver</parameter>
     </parameters>
 
     <services>
-        <!-- @deprecated legacy service - remove at Core-2.0 -->
+        <!-- @deprecated legacy services - remove at Core-2.0 -->
         <service id="zikula_core.legacy.theme_template_override_listener" class="%zikula_core.legacy.theme_template_override_listener.class%">
             <tag name="kernel.event_subscriber" />
         </service>
-
-        <service id="zikula_core.common.theme_engine" class="%zikula_core.common.theme_engine.class%">
-            <argument type="service" id="request_stack" strict="false" />
-            <argument type="service" id="annotation_reader" />
-            <argument type="service" id="kernel" strict="false" />
-            <argument type="service" id="zikula_core.internal.theme_filter" />
-            <argument type="service" id="zikula_blocks_module.api.block" />
-            <argument type="service" id="zikula_extensions_module.api.variable" />
+        <service id="zikula.config_template_override_listener" class="%zikula.config_template_override_listener.class%">
+            <tag name="kernel.event_subscriber" />
         </service>
 
+        <!-- non-legacy -->
         <service id="zikula_core.internal.theme.create_themed_response_listener" class="%zikula_core.internal.theme.create_themed_response_listener.class%">
             <tag name="kernel.event_subscriber" />
             <tag name="monolog.logger" channel="request" />
@@ -82,6 +80,15 @@
         <service id="zikula_core.internal.theme.module_stylesheet_insert_listener" class="%zikula_core.internal.theme.module_stylesheet_insert_listener.class%">
             <argument id="kernel" type="service"/>
             <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="zikula_core.common.theme_engine" class="%zikula_core.common.theme_engine.class%">
+            <argument type="service" id="request_stack" strict="false" />
+            <argument type="service" id="annotation_reader" />
+            <argument type="service" id="kernel" strict="false" />
+            <argument type="service" id="zikula_core.internal.theme_filter" />
+            <argument type="service" id="zikula_blocks_module.api.block" />
+            <argument type="service" id="zikula_extensions_module.api.variable" />
         </service>
 
         <service id="zikula_core.common.theme.assets_js" class="%zikula_core.common.theme.assets.js.class%" />

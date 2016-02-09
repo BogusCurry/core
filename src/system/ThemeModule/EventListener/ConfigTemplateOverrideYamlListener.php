@@ -11,21 +11,22 @@
  * information regarding copyright and licensing.
  */
 
-namespace Zikula\Bundle\CoreBundle\EventListener;
+namespace Zikula\ThemeModule\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Yaml\Yaml;
 use Zikula\Core\Event\GenericEvent;
 
 /**
+ * @deprecated remove at Core-2.0
  * Event handler to override templates.
  */
-class ThemeTemplateOverrideYamlListener implements EventSubscriberInterface
+class ConfigTemplateOverrideYamlListener implements EventSubscriberInterface
 {
     /**
      * Associative array.
      *
-     * Maps template path to overriden path.
+     * Maps template path to overridden path.
      *
      * @var array
      */
@@ -33,14 +34,8 @@ class ThemeTemplateOverrideYamlListener implements EventSubscriberInterface
 
     public function __construct()
     {
-        $themeName = \UserUtil::getTheme();
-        $theme = \ThemeUtil::getTheme($themeName);
-        if (null !== $theme && is_readable($path = $theme->getConfigPath() . '/overrides.yml')) {
-            // bundle type theme
-            $this->overrideMap = Yaml::parse(file_get_contents($path));
-        } elseif (is_readable("themes/$themeName/templates/overrides.yml")) {
-            // pre-1.4.0 style theme
-            $this->_overrideMap = Yaml::parse(file_get_contents("themes/$themeName/templates/overrides.yml"));
+        if (is_readable('config/template_overrides.yml')) {
+            $this->overrideMap = Yaml::parse(file_get_contents('config/template_overrides.yml'));
         }
     }
 
@@ -61,8 +56,8 @@ class ThemeTemplateOverrideYamlListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        // weight as 5 sets theme overrides taking precedent over config overrides
-        // @see \Zikula\Bundle\CoreBundle\EventListener\ConfigTemplateOverrideYamlListener
-        return array('zikula_view.template_override' => array('handler', 5));
+        // weight as 4 sets theme overrides taking precedent over config overrides
+        // @see \Zikula\Bundle\CoreBundle\EventListener\ThemeTemplateOverrideYamlListener
+        return array('zikula_view.template_override' => array('handler', 4));
     }
 }

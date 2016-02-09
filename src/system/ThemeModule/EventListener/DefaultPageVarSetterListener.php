@@ -11,18 +11,18 @@
  * information regarding copyright and licensing.
  */
 
-namespace Zikula\Bundle\CoreBundle\EventListener\Theme;
+namespace Zikula\ThemeModule\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouterInterface;
-use Zikula\Core\Theme\ParameterBag;
+use Zikula\ThemeModule\Engine\ParameterBag;
 use Zikula\ExtensionsModule\Api\VariableApi;
 
 /**
  * Class DefaultPageVarSetterListener
- * @package Zikula\Bundle\CoreBundle\EventListener\Theme
+ * @package Zikula\ThemeModule\EventListener
  *
  * This class sets default pagevars that are available in all Twig templates in a global scope.
  * @todo remove use of legacy Util classes and replace

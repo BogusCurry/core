@@ -1,13 +1,13 @@
 <?php
 
-namespace Zikula\Core\Theme\Annotation;
+namespace Zikula\ThemeModule\Engine\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
 
 /**
  * @Annotation
  * Class Theme
- * @package Zikula\Core\Theme\Annotation
+ * @package Zikula\ThemeModule\Engine\Annotation
  *
  * This annotation is used in a Controller Action Method.
  *  like so: @Theme('admin')
@@ -17,7 +17,7 @@ use Doctrine\Common\Annotations\Annotation;
  *  - 'atom'
  *  - 'rss'
  *  - any valid theme name (e.g. 'ZikulaAndreas08Theme')
- * @see \Zikula\Core\Theme\Engine::changeThemeByAnnotation
+ * @see \Zikula\ThemeModule\Engine\Engine::changeThemeByAnnotation
  */
 class Theme extends Annotation
 {
