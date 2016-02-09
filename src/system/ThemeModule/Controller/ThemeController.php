@@ -194,14 +194,22 @@ class ThemeController extends AbstractController
                     $fs = new Filesystem();
                     $path = realpath($this->get('kernel')->getRootDir() . '/../themes/' . $themeEntity->getDirectory());
                     try {
+                        // attempt to delete files
                         $fs->remove($path);
                         $this->addFlash('status', $this->__('Files removed as requested.'));
                     } catch (IOException $e) {
                         $this->addFlash('danger', $this->__('Could not remove files as requested.') . ' (' . $e->getMessage() . ') ' . $this->__('The files must be removed manually.'));
                     }
                 }
+                // remove theme
                 $this->getDoctrine()->getManager()->remove($themeEntity);
+                // remove any theme vars
+                $vars = $this->get('zikula_extensions_module.api.variable')->getAll($themeName);
+                foreach ($vars as $var) {
+                    $this->getDoctrine()->getManager()->remove($var);
+                }
                 $this->getDoctrine()->getManager()->flush();
+                // clear all caches
                 $this->get('zikula.cache_clearer')->clear('twig');
                 $this->get('zikula.cache_clearer')->clear('symfony.config');
                 $this->addFlash('status', $data['deletefiles'] ? $this->__('Done! Deleted the theme.') : $this->__('Done! Deactivated the theme.'));
