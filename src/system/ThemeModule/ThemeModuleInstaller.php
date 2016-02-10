@@ -35,7 +35,7 @@ class ThemeModuleInstaller extends AbstractExtensionInstaller
         }
 
         // detect all themes on install
-        Util::regenerate();
+        $this->container->get('zikula_theme_module.helper.bundle_sync_helper')->regenerate();
 
         // define defaults for module vars
         $this->setVar('modulesnocache', '');
