@@ -26,7 +26,6 @@ use Zikula\Core\Controller\AbstractController;
 use Zikula\ThemeModule\Engine\Annotation\Theme;
 use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\ThemeModule\Entity\Repository\ThemeEntityRepository;
-use Zikula\ThemeModule\Util;
 
 /**
  * Class ThemeController
@@ -59,10 +58,10 @@ class ThemeController extends AbstractController
             // only the main site can regenerate the themes list
             if ($this->container['multisites.mainsiteurl'] == $request->query->get('sitedns', null)) {
                 //return true but any action has been made
-                Util::regenerate();
+                $this->get('zikula_theme_module.helper.bundle_sync_helper')->regenerate();
             }
         } else {
-            Util::regenerate();
+            $this->get('zikula_theme_module.helper.bundle_sync_helper')->regenerate();
         }
 
         $themes = $this->get('zikula_theme_module.theme_entity.repository')->get(ThemeEntityRepository::FILTER_ALL, ThemeEntityRepository::STATE_ALL);

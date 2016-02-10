@@ -114,4 +114,16 @@ class ThemeEntityRepository extends EntityRepository
 
         return $this->filteredGetCache[$key];
     }
+
+    public function removeAndFlush($entity)
+    {
+        $this->_em->remove($entity);
+        $this->_em->flush();
+    }
+
+    public function persistAndFlush($entity)
+    {
+        $this->_em->persist($entity);
+        $this->_em->flush();
+    }
 }

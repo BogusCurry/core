@@ -13,7 +13,6 @@
 
 namespace Zikula\ThemeModule\Api;
 
-use Zikula\ThemeModule\Util;
 use ModUtil;
 use SecurityUtil;
 use ThemeUtil;
@@ -36,7 +35,7 @@ class AdminApi extends \Zikula_AbstractApi
      */
     public function regenerate()
     {
-        return Util::regenerate();
+        return $this->get('zikula_theme_module.helper.bundle_sync_helper')->regenerate();
     }
 
     /**

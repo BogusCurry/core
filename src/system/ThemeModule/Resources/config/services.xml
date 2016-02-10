@@ -8,6 +8,7 @@
         <parameter key="zikula_theme_module.twig.extension.theme_extension.class">Zikula\ThemeModule\Twig\Extension\ThemeExtension</parameter>
         <parameter key="zikula_theme_module.container.link_container.class">Zikula\ThemeModule\Container\LinkContainer</parameter>
         <parameter key="zikula_theme_module.theme_entity.repository.class">Zikula\ThemeModule\Entity\Repository\ThemeEntityRepository</parameter>
+        <parameter key="zikula_theme_module.helper.bundle_sync_helper.class">Zikula\ThemeModule\Helper\BundleSyncHelper</parameter>
     </parameters>
 
     <services>
@@ -32,6 +33,11 @@
             <call method="setKernel">
                 <argument type="service" id="kernel" />
             </call>
+        </service>
+
+        <service id="zikula_theme_module.helper.bundle_sync_helper" class="%zikula_theme_module.helper.bundle_sync_helper.class%" lazy="true">
+            <argument type="service" id="kernel" />
+            <argument type="service" id="zikula_theme_module.theme_entity.repository" />
         </service>
 
     </services>
